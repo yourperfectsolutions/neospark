@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoSpark Genie - Your Operational AI Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="NeoSpark Genie - Your operational AI assistant for enterprise task management">
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="splash-screen hidden">
+        <div class="splash-content">
+            <div class="logo-container">
+                <div class="spark-icon">✨</div>
+                <h1 class="logo-text">NeoSpark Genie</h1>
+            </div>
+            <p class="tagline">Your operational AI assistant</p>
+            <div class="sparkle-effect" style="top: 30%; left: 20%;"></div>
+            <div class="sparkle-effect" style="top: 60%; right: 25%;"></div>
+            <div class="sparkle-effect" style="bottom: 30%; left: 70%;"></div>
+        </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="auth-screen hidden">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to access your operational workspace</p>
+            </div>
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="login-email" class="form-label">Email Address</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password" class="form-label">Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">Sign In</button>
+                <a href="#" class="forgot-password">Forgot your password?</a>
+            </form>
+            <div class="mt-8">
+                <p style="text-align: center; color: rgba(255, 255, 255, 0.8); margin-bottom: 12px;">Don't have an account?</p>
+                <button id="show-signup" class="btn btn--outline btn--full-width">Create Account</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Screen -->
+    <div id="signup-screen" class="auth-screen hidden">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1>Create Account</h1>
+                <div class="progress-stepper">
+                    <div class="step active"></div>
+                    <div class="step"></div>
+                    <div class="step"></div>
+                </div>
+            </div>
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="signup-name" class="form-label">Full Name</label>
+                    <input type="text" id="signup-name" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-company" class="form-label">Company</label>
+                    <input type="text" id="signup-company" class="form-control" placeholder="Your company name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-role" class="form-label">Role</label>
+                    <select id="signup-role" class="form-control" required>
+                        <option value="">Select your role</option>
+                        <option value="manager">Manager</option>
+                        <option value="director">Director</option>
+                        <option value="executive">Executive</option>
+                        <option value="analyst">Analyst</option>
+                        <option value="coordinator">Coordinator</option>
+                        <option value="specialist">Specialist</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="benefits-section">
+                    <h3>How You'll Benefit</h3>
+                    <ul class="benefits-list">
+                        <li><span class="benefit-icon">🤖</span> AI-powered task automation</li>
+                        <li><span class="benefit-icon">📈</span> Advanced analytics & insights</li>
+                        <li><span class="benefit-icon">👥</span> Seamless team collaboration</li>
+                        <li><span class="benefit-icon">⚡</span> Increased productivity</li>
+                    </ul>
+                </div>
+                <button type="submit" class="btn btn--secondary btn--full-width">Create My Account</button>
+            </form>
+            <div class="mt-8">
+                <p style="text-align: center; color: rgba(255, 255, 255, 0.8); margin-bottom: 12px;">Already have an account?</p>
+                <button id="show-login" class="btn btn--outline btn--full-width">Sign In</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="main-app" class="main-app hidden">
+        <!-- App Bar -->
+        <header class="app-bar">
+            <button id="hamburger-btn" class="hamburger-btn">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </button>
+            <h1 class="app-title">NeoSpark Genie</h1>
+            <div class="user-avatar">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="User Avatar">
+            </div>
+        </header>
+
+        <!-- Side Navigation -->
+        <nav id="side-nav" class="side-nav">
+            <div class="nav-header">
+                <div class="user-info">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=48&h=48&fit=crop&crop=face" alt="User" class="nav-avatar">
+                    <div>
+                        <div class="nav-user-name">John Smith</div>
+                        <div class="nav-user-role">Project Manager</div>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" data-page="home"><span class="nav-icon">🏠</span> Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-page="tasks"><span class="nav-icon">📋</span> My Tasks</a></li>
+                <li><a href="#" class="nav-link" data-page="submit"><span class="nav-icon">➕</span> Submit Task</a></li>
+                <li><a href="#" class="nav-link" data-page="team"><span class="nav-icon">👥</span> Team Overview</a></li>
+                <li><a href="#" class="nav-link" data-page="insights"><span class="nav-icon">📊</span> Analytics</a></li>
+                <li><a href="#" class="nav-link" data-page="notifications"><span class="nav-icon">🔔</span> Notifications</a></li>
+                <li><a href="#" class="nav-link" data-page="settings"><span class="nav-icon">⚙️</span> Settings</a></li>
+                <li class="logout"><a href="#" id="logout-btn" class="nav-link"><span class="nav-icon">🚪</span> Log Out</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home/Dashboard Page -->
+            <div id="home-page" class="page active">
+                <div class="page-header">
+                    <h2>Dashboard</h2>
+                    <p>Get insights into your operational performance and team productivity</p>
+                </div>
+
+                <!-- Quick Actions -->
+                <section class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="actions-carousel">
+                        <div class="action-card new-task" data-page="submit">
+                            <span class="action-icon">➕</span>
+                            <span>New Task</span>
+                        </div>
+                        <div class="action-card my-tasks" data-page="tasks">
+                            <span class="action-icon">📋</span>
+                            <span>My Tasks</span>
+                        </div>
+                        <div class="action-card team-overview" data-page="team">
+                            <span class="action-icon">👥</span>
+                            <span>Team</span>
+                        </div>
+                        <div class="action-card insights" data-page="insights">
+                            <span class="action-icon">📊</span>
+                            <span>Insights</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Overview Cards -->
+                <section class="overview-section">
+                    <div class="overview-grid">
+                        <div class="overview-card">
+                            <span class="card-icon">⏳</span>
+                            <div>
+                                <div class="card-number">8</div>
+                                <div class="card-label">Pending Tasks</div>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <span class="card-icon">✅</span>
+                            <div>
+                                <div class="card-number">12</div>
+                                <div class="card-label">Completed This Week</div>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <span class="card-icon">⏱️</span>
+                            <div>
+                                <div class="card-number">24<span style="font-size: 14px;">hrs</span></div>
+                                <div class="card-label">Avg. Turnaround</div>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <span class="card-icon">⭐</span>
+                            <div>
+                                <div class="card-number">4.8</div>
+                                <div class="card-label">Client Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Activity -->
+                <section class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-feed">
+                        <div class="activity-item">
+                            <span class="activity-icon">📝</span>
+                            <div class="activity-content">
+                                <div class="activity-title">Website Redesign Project</div>
+                                <div class="activity-subtitle">updated by Sarah Johnson</div>
+                                <div class="activity-timestamp">2 hours ago</div>
+                            </div>
+                            <span class="status-pill status--success">In Progress</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-icon">👤</span>
+                            <div class="activity-content">
+                                <div class="activity-title">API Integration</div>
+                                <div class="activity-subtitle">assigned to Mike Chen</div>
+                                <div class="activity-timestamp">3 hours ago</div>
+                            </div>
+                            <span class="status-pill status--warning">Pending</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-icon">✅</span>
+                            <div class="activity-content">
+                                <div class="activity-title">Content Audit</div>
+                                <div class="activity-subtitle">completed by Lisa Wang</div>
+                                <div class="activity-timestamp">5 hours ago</div>
+                            </div>
+                            <span class="status-pill status--info">Completed</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Tasks Page -->
+            <div id="tasks-page" class="page">
+                <div class="page-header">
+                    <h2>My Tasks</h2>
+                    <p>Manage and track your assigned tasks and projects</p>
+                </div>
+                <div class="tasks-list">
+                    <div class="task-card">
+                        <div class="task-header">
+                            <h3>Website Redesign Project</h3>
+                            <span class="status-pill status--success">In Progress</span>
+                        </div>
+                        <p>Complete redesign of company website with modern UI/UX principles and responsive design.</p>
+                        <div class="task-meta">
+                            <span>👤 AI + Design Team</span>
+                            <span>📅 Due: Jul 15, 2025</span>
+                            <span class="task-priority priority-high">🔴 High Priority</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                    <div class="task-card">
+                        <div class="task-header">
+                            <h3>Marketing Campaign Analysis</h3>
+                            <span class="status-pill status--info">Completed</span>
+                        </div>
+                        <p>Analyze Q2 marketing campaign performance and provide insights for optimization.</p>
+                        <div class="task-meta">
+                            <span>🤖 AI Assistant</span>
+                            <span>📅 Due: Jun 20, 2025</span>
+                            <span class="task-priority">🟡 Medium Priority</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="task-card">
+                        <div class="task-header">
+                            <h3>Client Presentation Deck</h3>
+                            <span class="status-pill status--warning">Pending</span>
+                        </div>
+                        <p>Create comprehensive presentation deck for upcoming client meeting and proposal.</p>
+                        <div class="task-meta">
+                            <span>👨‍💼 Human Expert</span>
+                            <span>📅 Due: Jun 30, 2025</span>
+                            <span class="task-priority priority-high">🔴 High Priority</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Task Page -->
+            <div id="submit-page" class="page">
+                <div class="page-header">
+                    <h2>Submit New Task</h2>
+                    <p>Create a new task with detailed requirements and resource preferences</p>
+                </div>
+                <form class="task-form">
+                    <div class="form-section">
+                        <h3>Task Details</h3>
+                        <div class="form-group">
+                            <label class="form-label">Task Title</label>
+                            <input type="text" class="form-control" placeholder="Enter a clear, descriptive task title" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" rows="4" placeholder="Provide detailed task requirements, objectives, and expected outcomes" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Priority Level</label>
+                                <select class="form-control" required>
+                                    <option value="">Select priority</option>
+                                    <option value="urgent">🔴 Urgent</option>
+                                    <option value="high">🟠 High</option>
+                                    <option value="medium">🟡 Medium</option>
+                                    <option value="low">🟢 Low</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Due Date</label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Resource Preference</h3>
+                        <div class="resource-options">
+                            <label class="resource-option">
+                                <input type="radio" name="resource" value="ai" required>
+                                <div class="resource-card">
+                                    <div class="resource-icon">🤖</div>
+                                    <div class="resource-title">AI Assistant</div>
+                                    <div class="resource-desc">Fast, automated processing</div>
+                                </div>
+                            </label>
+                            <label class="resource-option">
+                                <input type="radio" name="resource" value="human" required>
+                                <div class="resource-card">
+                                    <div class="resource-icon">👤</div>
+                                    <div class="resource-title">Human Expert</div>
+                                    <div class="resource-desc">Creative, strategic thinking</div>
+                                </div>
+                            </label>
+                            <label class="resource-option">
+                                <input type="radio" name="resource" value="hybrid" required>
+                                <div class="resource-card">
+                                    <div class="resource-icon">🤝</div>
+                                    <div class="resource-title">AI + Human</div>
+                                    <div class="resource-desc">Best of both worlds</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Additional Information</h3>
+                        <div class="form-group">
+                            <label class="form-label">Attachments</label>
+                            <input type="file" class="form-control" multiple>
+                        </div>
+                        <div class="ai-helper">
+                            <p style="color: var(--color-text-secondary); font-size: 14px;">
+                                💡 Need help defining your task? Use our AI helper by clicking the microphone icon below.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn--secondary btn--lg">Submit Task</button>
+                </form>
+            </div>
+
+            <!-- Team Overview Page -->
+            <div id="team-page" class="page">
+                <div class="page-header">
+                    <h2>Team Overview</h2>
+                    <p>Monitor team performance, workload distribution, and skill utilization</p>
+                </div>
+                <div class="team-grid">
+                    <div class="team-member-card">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b67d4fa7?w=80&h=80&fit=crop&crop=face" alt="Sarah Johnson" class="member-avatar">
+                        <div class="member-info">
+                            <h3>Sarah Johnson</h3>
+                            <div class="member-role">Designer</div>
+                            <div class="member-skills">
+                                <span class="skill-tag">UI/UX</span>
+                                <span class="skill-tag">Graphics</span>
+                                <span class="skill-tag">Branding</span>
+                            </div>
+                            <div class="load-indicator">
+                                <span class="load-label">Current Workload: 75%</span>
+                                <div class="load-bar">
+                                    <div class="load-fill" style="width: 75%;"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn--primary btn--sm">Quick Assign</button>
+                        </div>
+                    </div>
+                    <div class="team-member-card">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="Mike Chen" class="member-avatar">
+                        <div class="member-info">
+                            <h3>Mike Chen</h3>
+                            <div class="member-role">Developer</div>
+                            <div class="member-skills">
+                                <span class="skill-tag">Web Dev</span>
+                                <span class="skill-tag">Backend</span>
+                                <span class="skill-tag">API</span>
+                            </div>
+                            <div class="load-indicator">
+                                <span class="load-label">Current Workload: 60%</span>
+                                <div class="load-bar">
+                                    <div class="load-fill" style="width: 60%;"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn--primary btn--sm">Quick Assign</button>
+                        </div>
+                    </div>
+                    <div class="team-member-card">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="Lisa Wang" class="member-avatar">
+                        <div class="member-info">
+                            <h3>Lisa Wang</h3>
+                            <div class="member-role">Content Specialist</div>
+                            <div class="member-skills">
+                                <span class="skill-tag">Copywriting</span>
+                                <span class="skill-tag">Strategy</span>
+                                <span class="skill-tag">SEO</span>
+                            </div>
+                            <div class="load-indicator">
+                                <span class="load-label">Current Workload: 45%</span>
+                                <div class="load-bar">
+                                    <div class="load-fill" style="width: 45%;"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn--primary btn--sm">Quick Assign</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insights/Analytics Page -->
+            <div id="insights-page" class="page">
+                <div class="page-header">
+                    <h2>Analytics & Insights</h2>
+                    <p>Comprehensive analytics on performance, efficiency, and resource utilization</p>
+                </div>
+                <div class="insights-grid">
+                    <div class="overview-grid">
+                        <div class="overview-card">
+                            <span class="card-icon">📈</span>
+                            <div>
+                                <div class="card-number">+23%</div>
+                                <div class="card-label">Efficiency Increase</div>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <span class="card-icon">⚡</span>
+                            <div>
+                                <div class="card-number">2.4x</div>
+                                <div class="card-label">Speed Improvement</div>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <span class="card-icon">💰</span>
+                            <div>
+                                <div class="card-number">$12K</div>
+                                <div class="card-label">Cost Savings</div>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <span class="card-icon">🎯</span>
+                            <div>
+                                <div class="card-number">94%</div>
+                                <div class="card-label">Goal Achievement</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications Page -->
+            <div id="notifications-page" class="page">
+                <div class="page-header">
+                    <h2>Notifications</h2>
+                    <p>Stay updated with task assignments, mentions, and system updates</p>
+                </div>
+                <div class="notification-tabs">
+                    <button class="tab-btn active" data-tab="all">All</button>
+                    <button class="tab-btn" data-tab="mentions">Mentions</button>
+                    <button class="tab-btn" data-tab="tasks">Tasks</button>
+                </div>
+                <div class="notifications-list">
+                    <div class="notification-item unread">
+                        <span class="notification-icon">📋</span>
+                        <div class="notification-content">
+                            <div class="notification-text">New task assigned: Website Redesign Project</div>
+                            <div class="notification-time">2 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="notification-item unread">
+                        <span class="notification-icon">@</span>
+                        <div class="notification-content">
+                            <div class="notification-text">Sarah mentioned you in API Integration discussion</div>
+                            <div class="notification-time">4 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <span class="notification-icon">🔔</span>
+                        <div class="notification-content">
+                            <div class="notification-text">System update: NeoSpark has been updated to version 2.1</div>
+                            <div class="notification-time">1 day ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settings-page" class="page">
+                <div class="page-header">
+                    <h2>Profile & Settings</h2>
+                    <p>Manage your profile, preferences, and application settings</p>
+                </div>
+                <div class="settings-sections">
+                    <div class="settings-section">
+                        <h3>Profile Information</h3>
+                        <div class="setting-item">
+                            <div>
+                                <div class="setting-label">Full Name</div>
+                                <div class="setting-desc">John Smith</div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div>
+                                <div class="setting-label">Company</div>
+                                <div class="setting-desc">Your Perfect Solutions</div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <div>
+                                <div class="setting-label">Role</div>
+                                <div class="setting-desc">Project Manager</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Appearance</h3>
+                        <div class="setting-item">
+                            <div>
+                                <div class="setting-label">Theme</div>
+                                <div class="setting-desc">Choose your preferred color scheme</div>
+                            </div>
+                            <div class="theme-toggle">
+                                <button class="theme-btn active" data-theme="light">Light</button>
+                                <button class="theme-btn" data-theme="dark">Dark</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Notifications</h3>
+                        <div class="setting-item">
+                            <div>
+                                <div class="setting-label">Email Notifications</div>
+                                <div class="setting-desc">Receive email updates for important events</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div>
+                                <div class="setting-label">Push Notifications</div>
+                                <div class="setting-desc">Get real-time browser notifications</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Integrations</h3>
+                        <div class="setting-item">
+                            <div>
+                                <div class="setting-label">Slack Integration</div>
+                                <div class="setting-desc">Connect with your Slack workspace</div>
+                            </div>
+                            <button class="btn btn--outline btn--sm">Connect</button>
+                        </div>
+                        <div class="setting-item">
+                            <div>
+                                <div class="setting-label">Microsoft Teams</div>
+                                <div class="setting-desc">Sync with Microsoft Teams</div>
+                            </div>
+                            <button class="btn btn--outline btn--sm">Connect</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Floating Action Button -->
+        <button class="fab" data-page="submit">+</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
